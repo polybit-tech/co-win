@@ -9,11 +9,11 @@ st.set_page_config(page_title='Co-Win: Covid-19 Vaccination Tracker', page_icon=
 
 ua = UserAgent()
 header = {'User-Agent': 'Mozilla/5.0'}
-state_reponse = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/states', headers=header)
+state_response = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/states', headers=header)
 print("\n\n ==================== \n\n")
 print(state_response)
 print("\n\n ==================== \n\n")
-states = state_reponse.json()
+states = state_response.json()
 states_dict = {}
 states_dict['0'] = 'Select State'
 for i in states['states']:
