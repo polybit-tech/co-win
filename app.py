@@ -8,11 +8,7 @@ from fake_useragent import UserAgent
 st.set_page_config(page_title='Co-Win: Covid-19 Vaccination Tracker', page_icon='💉', layout = 'centered', initial_sidebar_state = 'expanded')
 
 ua = UserAgent()
-header = {'User-Agent': 'Mozilla/5.0'}
-state_response = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/states', headers=header)
-print("\n\n ==================== \n\n")
-print(state_response)
-print("\n\n ==================== \n\n")
+state_response = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/states')
 states = state_response.json()
 states_dict = {}
 states_dict['0'] = 'Select State'
@@ -32,7 +28,7 @@ def get_table_download_link(df, filename, text):
     return f'<a href="data:file/csv;base64,{b64}" download="{filename}">{text}</a>'
 
 def get_districts(key):
-    district_reponse = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/districts/'+key, headers=header)
+    district_reponse = requests.get('https://cdn-api.co-vin.in/api/v2/admin/location/districts/'+key)
     districts = district_reponse.json()
     districts_dict = {}
     for i in districts['districts']:
@@ -92,8 +88,7 @@ if location_choice == "District":
 
             if col2.button("Search!"):
                 center_response = requests.get(
-                    f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id={dist_key}&date={new_date}",
-                    headers=header)
+                    f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id={dist_key}&date={new_date}")
                 centers_data = center_response.json()
                 centers = pd.DataFrame(centers_data.get('centers'))
 
@@ -175,8 +170,7 @@ elif location_choice == 'PIN Code':
 
         if col2.button("Search!"):
             center_response = requests.get(
-            f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode={area_pin}&date={new_date}",
-            headers=header)
+            f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode={area_pin}&date={new_date}")
             centers_data = center_response.json()
             centers = pd.DataFrame(centers_data.get('centers'))
 
