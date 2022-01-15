@@ -4,4 +4,3 @@ Pillow==8.4.0
 requests==2.26.0
 json5==0.9.6
 jsonschema==4.3.3
-fake-useragent==0.1.11
